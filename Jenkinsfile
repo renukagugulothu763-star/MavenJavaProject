@@ -1,5 +1,6 @@
 
 
+
 pipeline {
     agent any
 
@@ -24,6 +25,13 @@ pipeline {
         stage('Test') {
             steps {
                 bat 'mvn test'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar',
+                                 fingerprint: true
             }
         }
     }
